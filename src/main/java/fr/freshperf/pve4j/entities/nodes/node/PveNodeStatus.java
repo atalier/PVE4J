@@ -1,14 +1,25 @@
 package fr.freshperf.pve4j.entities.nodes.node;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Represents detailed node status information.
  */
 public class PveNodeStatus {
 
     private String uptime, wait, idle, pveversion, kversion;
-    private float cpu, loadavg[];
-    private long memory, rootfs, swap;
-    private int cpuinfo;
+    private float cpu;
+    private String[] loadavg;
+    private PveNodeMemory memory;
+    private PveNodeRootfs rootfs;
+    private PveNodeSwap swap;
+    private PveNodeCpuInfo cpuinfo;
+
+    @SerializedName("boot-info")
+    private PveNodeBootInfo bootInfo;
+
+    @SerializedName("current-kernel")
+    private PveNodeCurrentKernel currentKernel;
 
     public String getUptime() {
         return uptime;
@@ -34,24 +45,32 @@ public class PveNodeStatus {
         return cpu;
     }
 
-    public float[] getLoadavg() {
+    public String[] getLoadavg() {
         return loadavg;
     }
 
-    public long getMemory() {
+    public PveNodeMemory getMemory() {
         return memory;
     }
 
-    public long getRootfs() {
+    public PveNodeRootfs getRootfs() {
         return rootfs;
     }
 
-    public long getSwap() {
+    public PveNodeSwap getSwap() {
         return swap;
     }
 
-    public int getCpuinfo() {
+    public PveNodeCpuInfo getCpuinfo() {
         return cpuinfo;
+    }
+
+    public PveNodeBootInfo getBootInfo() {
+        return bootInfo;
+    }
+
+    public PveNodeCurrentKernel getCurrentKernel() {
+        return currentKernel;
     }
 
     @Override
@@ -67,7 +86,8 @@ public class PveNodeStatus {
                 ", rootfs=" + rootfs +
                 ", swap=" + swap +
                 ", cpuinfo=" + cpuinfo +
+                ", bootInfo=" + bootInfo +
+                ", currentKernel=" + currentKernel +
                 '}';
     }
 }
-
